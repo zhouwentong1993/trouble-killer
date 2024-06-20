@@ -24,6 +24,8 @@ public class JedisConfig {
         return config;
     }
 
+
+
     @Bean
     public JedisPool jedisPool(JedisPoolConfig  jedisPoolConfig){
         return new JedisPool(jedisPoolConfig, "127.0.0.1", 6379);
