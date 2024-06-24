@@ -14,7 +14,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>killer-20240619-redis</module>
+        <module>killer-20240619-jedis</module>
+        <module>killer-20240624-jedis-pool</module>
     </modules>
 
     <properties>
