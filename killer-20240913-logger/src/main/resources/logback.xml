@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 常量定义start -->
+    <!-- 默认日志输出格式 -->
+    <contextName>${HOSTNAME}</contextName>
+    <property name="DEFAULT_PATTERN"
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS}$$%contextName{}$$%level{}$$passport-service-dingdd$$%thread{}$$%file{}/%line{}$$%method{}$$%class{}$$$$%msg%n"/>
+    <property name="DEFAULT_PATTERN_ELK"
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS}$$%contextName{}$$%level{}$$passport-service-dingdd$$%thread{}$$%file{}/%line{}$$%method{}$$%class{}$$$$%.-3072replace(%msg){'\\$\\$', ''}%n"/>
+    <property name="MAX_HISTORY" value="30"/>
+    <property name="SERVICE_NAME" value="passport-service-dingdd"/>
+    <property name="HOME_PATH" value="/Users/zhouwentong/logs"/>
+    <!-- 常量定义end -->
+
+    <!-- 默认日志的console appender，本地使用的日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50}) -
+                %yellow([%file:%line]) - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <springProfile name="local">
+        <!-- 服务器上使用的appender start -->
+        <!-- 默认的file appender，按天切分日志 -->
+        <appender name="ROLLING_FILE_DEFAULT"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${HOME_PATH}/logs/${SERVICE_NAME}/${HOSTNAME}-%d{yyyyMMdd}.log</fileNamePattern>
+                <maxHistory>${MAX_HISTORY}</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${DEFAULT_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 错误日志，按天切分 -->
+        <appender name="ROLLING_FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>ERROR</level>
+                <onMatch>ACCEPT</onMatch>
+                <onMismatch>DENY</onMismatch>
+            </filter>
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${HOME_PATH}/logs/${SERVICE_NAME}/${HOSTNAME}_error-%d{yyyyMMdd}.log</fileNamePattern>
+                <maxHistory>${MAX_HISTORY}</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${DEFAULT_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <appender name="ASYNC_ROLLING_FILE_DEFAULT" class="ch.qos.logback.classic.AsyncAppender">
+            <!-- 如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+            <discardingThreshold>-1</discardingThreshold>
+            <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+            <queueSize>2048</queueSize>
+            <!-- 添加附加的appender,最多只能添加一个 -->
+            <appender-ref ref="ROLLING_FILE_DEFAULT"/>
+        </appender>
+
+        <appender name="ASYNC_ROLLING_FILE_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+            <!-- 如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+            <discardingThreshold>-1</discardingThreshold>
+            <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+            <queueSize>2048</queueSize>
+            <!-- 添加附加的appender,最多只能添加一个 -->
+            <appender-ref ref="ROLLING_FILE_ERROR"/>
+        </appender>
+    </springProfile>
+
+<!--    <springProfile name="ali">-->
+<!--        &lt;!&ndash; 服务器上使用的appender start &ndash;&gt;-->
+<!--        &lt;!&ndash; 默认的file appender，按天切分日志 &ndash;&gt;-->
+<!--        <appender name="ROLLING_FILE_DEFAULT_ELK" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--            <append>true</append>-->
+<!--            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--                <fileNamePattern>${HOME_PATH}/logs/${SERVICE_NAME}/elk-${HOSTNAME}-%d{yyyyMMdd}.log</fileNamePattern>-->
+<!--                <maxHistory>${MAX_HISTORY}</maxHistory>-->
+<!--            </rollingPolicy>-->
+<!--            <encoder>-->
+<!--                <pattern>${DEFAULT_PATTERN_ELK}</pattern>-->
+<!--                <charset>UTF-8</charset>-->
+<!--            </encoder>-->
+<!--        </appender>-->
+
+<!--        <appender name="ASYNC_ROLLING_FILE_DEFAULT_ELK" class="ch.qos.logback.classic.AsyncAppender">-->
+<!--            &lt;!&ndash; 如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 &ndash;&gt;-->
+<!--            <discardingThreshold>-1</discardingThreshold>-->
+<!--            &lt;!&ndash; 更改默认的队列的深度,该值会影响性能.默认值为256 &ndash;&gt;-->
+<!--            <queueSize>2048</queueSize>-->
+<!--            <includeCallerData>true</includeCallerData>-->
+<!--            &lt;!&ndash; 添加附加的appender,最多只能添加一个 &ndash;&gt;-->
+<!--            <appender-ref ref="ROLLING_FILE_DEFAULT_ELK"/>-->
+<!--        </appender>-->
+<!--    </springProfile>-->
+
+
+    <root level="INFO">
+        <springProfile name="local">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC_ROLLING_FILE_DEFAULT"/>
+            <appender-ref ref="ASYNC_ROLLING_FILE_ERROR"/>
+        </springProfile>
+<!--        <springProfile name="!local">-->
+<!--            <appender-ref ref="STDOUT"/>-->
+<!--            <appender-ref ref="ASYNC_ROLLING_FILE_DEFAULT"/>-->
+<!--            <appender-ref ref="ASYNC_ROLLING_FILE_ERROR"/>-->
+<!--        </springProfile>-->
+<!--        <springProfile name="ali">-->
+<!--            <appender-ref ref="ASYNC_ROLLING_FILE_DEFAULT_ELK" />-->
+<!--        </springProfile>-->
+    </root>
+</configuration>
