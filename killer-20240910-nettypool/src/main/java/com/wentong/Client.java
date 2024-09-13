@@ -16,8 +16,8 @@ import java.nio.charset.StandardCharsets;
 public class Client {
 
     public static void main(String[] args) throws Exception {
-//        for (int i = 0; i < 50000; i++) { // 连接5次
-//            System.out.println("第 " + i + " 次连接");
+        for (int i = 0; i < 50000; i++) { // 连接5次
+            System.out.println("第 " + i + " 次连接");
 
             NioEventLoopGroup group = new NioEventLoopGroup();
             try {
@@ -32,7 +32,7 @@ public class Client {
             } finally {
                 group.shutdownGracefully();
             }
-//        }
+        }
 
 
     }

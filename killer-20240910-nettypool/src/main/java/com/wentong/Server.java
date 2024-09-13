@@ -51,10 +51,9 @@ public class Server {
                 //解析请求消息，做路由转发，代码省略
                 //转发成功，返回响应给客户端
                 ByteBuf respMsg = allocator.heapBuffer(body.length);
-//                respMsg.writeBytes(body);//作为示例，简化处理，将请求返回
+                respMsg.writeBytes(body);//作为示例，简化处理，将请求返回
                 System.out.println("write back to client: " + new String(body));
-                ctx.writeAndFlush(reqMsg);
-//                ReferenceCountUtil.release(reqMsg);
+                ctx.writeAndFlush(respMsg);
             });
         }
 
