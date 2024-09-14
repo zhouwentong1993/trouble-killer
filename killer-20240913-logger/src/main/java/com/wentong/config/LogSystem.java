@@ -145,7 +145,7 @@ public enum LogSystem {
         LogSystem logSystem = null;
 
         for (String s : host2Enum.keySet()) {
-//            logger.info("请求host:{},枚举host:{},包含：{}", host, s, host.contains(s));
+            logger.info("请求host:{},枚举host:{},包含：{}", host, s, host.contains(s));
             if (host.contains(s)) {
                 logSystem = host2Enum.get(s);
             }
