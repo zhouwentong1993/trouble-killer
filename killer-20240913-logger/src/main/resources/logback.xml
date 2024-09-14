@@ -4,9 +4,9 @@
     <!-- 默认日志输出格式 -->
     <contextName>${HOSTNAME}</contextName>
     <property name="DEFAULT_PATTERN"
-              value="%date{yyyy-MM-dd HH:mm:ss.SSS}$$%contextName{}$$%level{}$$passport-service-dingdd$$%thread{}$$%method{}$$%class{}$$$$%msg%n"/>
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS}$$%contextName{}$$%level{}$$passport-service-dingdd$$%thread{}$$$$%msg%n"/>
     <property name="DEFAULT_PATTERN_ELK"
-              value="%date{yyyy-MM-dd HH:mm:ss.SSS}$$%contextName{}$$%level{}$$passport-service-dingdd$$%thread{}$$%method{}$$%class{}$$$$%.-3072replace(%msg){'\\$\\$', ''}%n"/>
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS}$$%contextName{}$$%level{}$$passport-service-dingdd$$%thread{}$$$$%.-3072replace(%msg){'\\$\\$', ''}%n"/>
     <property name="MAX_HISTORY" value="30"/>
     <property name="SERVICE_NAME" value="passport-service-dingdd"/>
     <property name="HOME_PATH" value="/Users/zhouwentong/logs"/>
