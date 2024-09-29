@@ -104,7 +104,7 @@
 
     <root level="INFO">
         <springProfile name="local">
-            <appender-ref ref="STDOUT"/>
+<!--            <appender-ref ref="STDOUT"/>-->
             <appender-ref ref="ASYNC_ROLLING_FILE_DEFAULT"/>
             <appender-ref ref="ASYNC_ROLLING_FILE_ERROR"/>
         </springProfile>
