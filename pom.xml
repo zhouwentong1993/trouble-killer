@@ -18,6 +18,7 @@
         <module>killer-20240624-jedis-pool</module>
         <module>killer-20240910-nettypool</module>
         <module>killer-20240913-logger</module>
+        <module>killer-20241029-timewheel</module>
     </modules>
 
     <properties>
