@@ -11,7 +11,7 @@ public class TestController {
 
     @GetMapping("/hello")
     public String hello() {
-        LogSystem.getLogSystemFromHost("shop.loongpos.com.cn");
+        LogSystem.getLogSystemFromHost("bookgroup-web.example9.com");
         return "hello";
     }
 }
