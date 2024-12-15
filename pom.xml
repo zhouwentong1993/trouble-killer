@@ -19,6 +19,7 @@
         <module>killer-20240910-nettypool</module>
         <module>killer-20240913-logger</module>
         <module>killer-20241029-timewheel</module>
+        <module>killer-20241215-mysql-net_write_timeout</module>
     </modules>
 
     <properties>
