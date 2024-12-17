@@ -1,14 +1,14 @@
-package com.wentong.jdbc;
+package com.wentong.jdbc.controller;
 
 import java.sql.*;
 
 public class JDBCExample1 {
     public static void main(String[] args) {
         try {
-            String url = "jdbc:mysql://localhost:3306/test?netTimeoutForStreamingResults=10&socketTimeout=100&useSSL=false";
+            String url = "jdbc:mysql://localhost:3306/test?netTimeoutForStreamingResults=10&socketTimeout=110&useSSL=false";
 
             String username = "root"; // 替换为你的数据库用户名
-            String password = "12345678"; // 替换为你的数据库密码
+            String password = "root"; // 替换为你的数据库密码
             String sql = "SELECT id, username FROM user"; // 替换为你要查询的表和字段
 
             Connection conn = DriverManager.getConnection(url, username, password);

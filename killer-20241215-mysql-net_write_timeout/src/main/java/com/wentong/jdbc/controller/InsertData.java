@@ -1,4 +1,4 @@
-package com.wentong.jdbc;
+package com.wentong.jdbc.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,13 +12,13 @@ public class InsertData {
         // 数据库连接信息
         String url = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&connectTimeout=10000&socketTimeout=10000";
         String username = "root";  // 替换为你的数据库用户名
-        String password = "12345678";  // 替换为你的数据库密码
+        String password = "root";  // 替换为你的数据库密码
 
         // SQL 插入语句
         String sql = "INSERT INTO `user` (`username`) VALUES (?)";
 
         // 批量插入的记录数
-        int batchSize = 1000;  // 每次批量插入 1000 条记录
+        int batchSize = 10000;  // 每次批量插入 1000 条记录
         int totalRecords = 1000000;  // 总共插入 10 万条记录
 
         // 随机生成用户名

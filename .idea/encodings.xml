@@ -8,5 +8,7 @@
     <file url="file://$PROJECT_DIR$/killer-20240913-logger/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/killer-20241029-timewheel/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/killer-20241215-mysql-net_write_timeout/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>
